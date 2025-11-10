@@ -35,7 +35,6 @@ public class main {
 
         scanner.close();
     }
-
     private static void limpartela() {
         System.out.print("\033[H\033[2J");
         System.out.flush();

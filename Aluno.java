@@ -29,11 +29,8 @@ public class Aluno {
             }
         } while (opcao != 0);
     }
-    private static void limpartela() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
-        public String getNome() {
+
+    public String getNome() {
         return nome;
     }
 
@@ -47,5 +44,10 @@ public class Aluno {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    private static void limpartela() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 }

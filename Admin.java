@@ -29,6 +29,22 @@ public class Admin {
             }
         } while (opcao != 0);
     }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
     private static void limpartela() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
