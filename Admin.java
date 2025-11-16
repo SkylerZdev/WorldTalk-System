@@ -4,6 +4,13 @@ public class Admin {
     private String usuario;
     private String senha;
 
+    public Admin(){}
+    
+    public Admin(String usuario, String senha) {
+        this.usuario = usuario;
+        this.senha = senha;
+    }
+
     public void menuAdmin(Scanner scanner) {
         int opcao;
         do {

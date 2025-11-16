@@ -4,6 +4,13 @@ public class Aluno {
     private String nome;
     private String senha;
 
+    public Aluno(){}
+
+    public Aluno(String nome, String senha) {
+        this.nome = nome;
+        this.senha = senha;
+    }
+
     public void menuAluno(Scanner scanner) {
         int opcao;
         do {
