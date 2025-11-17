@@ -15,8 +15,8 @@ public class GerenciadorLogins {
     }
 
     public int CadastroAdm (String usuario, String senha, String senhaUniversal) {
-        if (senhaUniversal == null) {
-            System.out.println("Senha universal não definida. Não é possível cadastrar administrador.");
+        if (this.senhaUniversal == null) {
+            System.out.println("Senha universal ainda não definida. Não é possível cadastrar administrador.");
             return 0;
         }
         if (!senhaUniversal.equals(this.senhaUniversal)) {

@@ -1,32 +1,74 @@
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class Professor {
-    private String Adicionar;
-    private String Editar;
-    private String Remover;
+    private String nome;
+    private long id;
+    private Agenda agenda = new Agenda();
+    private Set<Curso> cursosHabilitados = new HashSet<Curso>();
 
-    // Getters
-    public String getAdicionar() {
-        return Adicionar;
+    public Professor(){}
+    
+    public Professor(String nome, long id) {
+        this.nome = nome;
+        this.id = id;
     }
 
-    public String getEditar() {
-        return Editar;
+    public String getNome() {
+        return nome;
     }
 
-    public String getRemover() {
-        return Remover;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    // Setters
-    public void setAdicionar(String Adicionar) {
-        this.Adicionar = Adicionar;
+    public long getId() {
+        return id;
     }
 
-    public void setEditar(String Editar) {
-        this.Editar = Editar;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public void setRemover(String Remover) {
-        this.Remover = Remover;
+    public List<Horario> getHorariosDisponiveis(DiaSemana dia) {
+        return agenda.getHorariosDisponiveis(dia);
+    }
+
+    public Set<Curso> getCursosHabilitados() {
+        return cursosHabilitados;
+    }
+
+    public void addCursoHabilitado(Curso curso) {
+        this.cursosHabilitados.add(curso);
+    }
+
+    public boolean ocuparHorario(DiaSemana dia, HorarioPermitido horario) {
+        List<Horario> horariosDia = agenda.getHorariosPorDia().get(dia);
+        for (Horario h : horariosDia) {
+            if (h.getHorarioPermitido() == horario) {
+                if(!h.isDisponivel()) {
+                    return false; // Horário já ocupado
+                }
+                h.setDisponivel(false);
+                return true; // Horário ocupado com sucesso
+            }
+        }
+        return false; // Horário não encontrado
+    }
+    
+    public boolean liberarHorario(DiaSemana dia, HorarioPermitido horario) {
+        List<Horario> horariosDia = agenda.getHorariosPorDia().get(dia);
+        for (Horario h : horariosDia) {
+            if (h.getHorarioPermitido() == horario) {
+                if(h.isDisponivel()) {
+                    return false; // Horário já livre
+                }
+                h.setDisponivel(true);
+                return true; // Horário liberado com sucesso
+            }
+        }
+        return false; // Horário não encontrado
     }
 
 }
