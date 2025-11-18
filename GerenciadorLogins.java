@@ -14,52 +14,48 @@ public class GerenciadorLogins {
         this.senhaUniversal = senha;
     }
 
-    public int CadastroAdm (String usuario, String senha, String senhaUniversal) {
+    public void CadastroAdm (String usuario, String senha, String senhaUniversal) throws CadastroException {
         if (this.senhaUniversal == null) {
-            System.out.println("Senha universal ainda não definida. Não é possível cadastrar administrador.");
-            return 0;
+            throw new CadastroException("Senha universal não definida.");
         }
         if (!senhaUniversal.equals(this.senhaUniversal)) {
-            System.out.println("Senha universal incorreta. Cadastro de administrador falhou.");
-            return 0;
+            throw new CadastroException("Senha universal incorreta.");
         }
         if (admins.containsKey(usuario)) {
-            System.out.println("Usuário administrador já existe.");
-            return 0;
+            throw new CadastroException("Usuário já existe.");
         }
         Admin novoAdmin = new Admin(usuario, senha);
         admins.put(usuario, novoAdmin);
-        return 1;
+        return;
     }
 
     public Admin LoginAdm (String usuario, String senha) throws LoginException {
         if (!admins.containsKey(usuario)) {
-            throw new LoginException("Usuário administrador não encontrado.");
+            throw new LoginException("Usuário não encontrado.");
         }
         Admin admin = admins.get(usuario);
         if (!admin.getSenha().equals(senha)) {
-            throw new LoginException("Senha incorreta para o usuário administrador.");
+            throw new LoginException("Senha incorreta..");
         }
         return admin;
     }
 
-    public int CadastroAluno (String usuario, String senha) {
+    public void CadastroAluno (String usuario, String senha) throws CadastroException {
         if (alunos.containsKey(usuario)) {
-            System.out.println("Usuário aluno já existe.");
-            return 0;
+            throw new CadastroException("Usuário já existe.");
         }
         Aluno novoAluno = new Aluno(usuario, senha);
         alunos.put(usuario, novoAluno);
-        return 1;
+        return;
     }
 
     public Aluno LoginAluno (String usuario, String senha) throws LoginException {
         if (!alunos.containsKey(usuario)) {
-            throw new LoginException("Usuário aluno não encontrado.");
+            throw new LoginException("Usuário não encontrado.");
         }
         Aluno aluno = alunos.get(usuario);
         if (!aluno.getSenha().equals(senha)) {
-            throw new LoginException("Senha incorreta para o usuário aluno.");
+            throw new LoginException("Senha incorreta.");
         }
         return aluno;
     }

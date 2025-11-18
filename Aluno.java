@@ -16,9 +16,7 @@ public class Aluno {
         do {
             limpartela();
             System.out.println("\n--- Menu Aluno ---");
-            System.out.println("1 - Login");
-            System.out.println("2 - Cadastro");
-            System.out.println("0 - Voltar");
+            System.out.println("Deu certo essa porra");
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
 
