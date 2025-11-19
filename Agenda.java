@@ -20,6 +20,7 @@ public class Agenda {
         }
     }
 
+    // Getters e Setters
     public EnumMap<DiaSemana, List<Horario>> getHorariosPorDia() {
         return horariosPorDia;
     }
@@ -28,6 +29,8 @@ public class Agenda {
         this.horariosPorDia = horariosPorDia;
     }
     
+    //Retorna uma lista de horários disponíveis para um dia específico
+
     public List<Horario> getHorariosDisponiveis(DiaSemana dia) {
         List<Horario> disponiveis = new ArrayList<>();
         List<Horario> todosHorarios = horariosPorDia.get(dia);

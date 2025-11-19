@@ -1,11 +1,14 @@
 import java.util.HashMap;
 import java.util.Map;
 
+
+//Gerenciador de Logins para Admins e Alunos
 public class GerenciadorLogins {
     String senhaUniversal;
     Map<String, Admin> admins = new HashMap<>();
     Map<String, Aluno> alunos = new HashMap<>();
 
+    // Define a senha universal apenas uma vez
     public void DefinirSenhaUniversal(String senha) {
         if (senhaUniversal != null) {
             System.out.println("Senha universal já definida.");
@@ -14,6 +17,7 @@ public class GerenciadorLogins {
         this.senhaUniversal = senha;
     }
 
+    //Cadastro e Login para Admins.
     public void CadastroAdm (String usuario, String senha, String senhaUniversal) throws CadastroException {
         if (this.senhaUniversal == null) {
             throw new CadastroException("Senha universal não definida.");
@@ -39,7 +43,8 @@ public class GerenciadorLogins {
         }
         return admin;
     }
-
+    
+    //Cadastro e Login para Alunos
     public void CadastroAluno (String usuario, String senha) throws CadastroException {
         if (alunos.containsKey(usuario)) {
             throw new CadastroException("Usuário já existe.");

@@ -2,6 +2,8 @@ public class Horario {
     private boolean disponivel;
     private HorarioPermitido horarioPermitido;
 
+
+    //Classe suporte para o Funcionamento da Agenda.
     public Horario(HorarioPermitido horarioPermitido) {
         this.horarioPermitido = horarioPermitido;
         disponivel = true;

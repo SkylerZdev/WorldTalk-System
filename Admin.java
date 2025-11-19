@@ -16,18 +16,26 @@ public class Admin {
         do {
             limpartela();
             System.out.println("\n--- Menu Administrador ---");
-            System.out.println("1 - Login");
-            System.out.println("2 - Cadastro");
+            System.out.println("1 - Gerenciar Cursos");
+            System.out.println("2 - Gerenciar Professores");
+            System.out.println("3 - Gerenciar Biblioteca Virtual");
+            System.out.println("4 - Gerenciar Alunos");
             System.out.println("0 - Voltar");
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
 
             switch (opcao) {
                 case 1:
-                    //Login
+                    //Menu de Cursos
                     break;
                 case 2:
-                    //Cadastro
+                    //Menu de Professores
+                    break;
+                case 3:
+                    //Menu de Biblioteca Virtual
+                    break;
+                case 4:
+                    //Menu de Alunos
                     break;
                 case 0:
                     break;
@@ -37,6 +45,7 @@ public class Admin {
         } while (opcao != 0);
     }
 
+    //Getters e Setters
     public String getUsuario() {
         return usuario;
     }

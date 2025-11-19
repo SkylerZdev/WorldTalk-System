@@ -8,6 +8,8 @@ public enum HorarioPermitido {
     private final int horaInicio;
     private final int horaFim;
 
+    //Definição da Grade de Horarios Permitidos
+
     public int getHoraInicio() {
         return horaInicio;
     }

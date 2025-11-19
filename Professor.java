@@ -8,6 +8,7 @@ public class Professor {
     private Agenda agenda = new Agenda();
     private Set<Curso> cursosHabilitados = new HashSet<Curso>();
 
+    //Construtores
     public Professor(){}
     
     public Professor(String nome, long id) {
@@ -15,6 +16,7 @@ public class Professor {
         this.id = id;
     }
 
+    //Getters e Setters
     public String getNome() {
         return nome;
     }
@@ -43,6 +45,7 @@ public class Professor {
         this.cursosHabilitados.add(curso);
     }
 
+    // Métodos para gerenciar horários na agenda
     public boolean ocuparHorario(DiaSemana dia, HorarioPermitido horario) {
         List<Horario> horariosDia = agenda.getHorariosPorDia().get(dia);
         for (Horario h : horariosDia) {

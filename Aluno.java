@@ -16,16 +16,13 @@ public class Aluno {
         do {
             limpartela();
             System.out.println("\n--- Menu Aluno ---");
-            System.out.println("Deu certo essa porra");
+            System.out.println("1 -  -");
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
 
             switch (opcao) {
                 case 1:
-                    //Login
-                    break;
-                case 2:
-                    //Cadastro
+                    //Definir Posteriormente
                     break;
                 case 0:
                     break;
@@ -35,6 +32,7 @@ public class Aluno {
         } while (opcao != 0);
     }
 
+    // Getters e Setters
     public String getNome() {
         return nome;
     }

@@ -1,38 +1,69 @@
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Comparator;
+
 public class Curso {
-    private String infoBase;
+    private String nome;
     private double mensalidade;
-    private int horarios;
-    private int niveis;
+    private List<Nivel> niveis;
+    private long id;
+   
+    // Comparator para ordenar os níveis pela dificuldade
+    private Comparator<Nivel> comparatorNivel = new Comparator< >() {
+        @Override
+        public int compare(Nivel n1, Nivel n2) {
+            return n1.getDificuldade().compareTo(n2.getDificuldade());
+        }
+    };
+
+    //Construtores
+    public Curso(){}
+
+    public Curso(String nome, double mensalidade, long id) {
+        this.nome = nome;
+        this.mensalidade = mensalidade;
+        this.id = id;
+        this.niveis = new ArrayList<Nivel>();
+    }
 
     // Getters
     public String getInfoBase() {
-        return infoBase;
+        return nome;
     }
 
     public double getMensalidade() {
         return mensalidade;
     }
 
-    public int getHorarios() {
-        return horarios;
+    public long getId() {
+        return id;
     }
-    public int getNiveis() {
+
+    public List<Nivel> getNiveis() {
         return niveis;
     }
 
     // Setters
-    public void setInfoBase(String infoBase) {
-        this.infoBase = infoBase;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public void setMensalidade(double mensalidade) {
         this.mensalidade = mensalidade;
     }
 
-    public void setHorarios(int horarios) {
-        this.horarios = horarios;
+    public void setId(long id) {
+        this.id = id;
     }
-    public void setNiveis(int niveis) {
-        this.niveis = niveis;
+
+    public void addNivel(Nivel nivel) {
+        niveis.add(nivel);
+        niveis.sort(comparatorNivel);
+    }
+
+    public void removerNivel(Nivel nivel) {
+        if (niveis.contains(nivel)){
+        niveis.remove(nivel);
+        }
     }
 }
