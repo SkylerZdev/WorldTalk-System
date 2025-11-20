@@ -2,54 +2,66 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Collections;
 
 public class GerenciadorAlunos {
 
-    
     private Map<Long, Aluno> alunos = new HashMap<>();
+
     private Map<Long, List<Turma>> alunoTurmas = new HashMap<>();
 
     public GerenciadorAlunos() {}
 
     public boolean adicionarAluno(Aluno aluno) {
         if(alunos.containsKey(aluno.getId())) {
-            return false; // Aluno já existe
+            return false; // aluno já existe no sistema
         }
         alunos.put(aluno.getId(), aluno);
-        return true; // Aluno adicionado com sucesso
+        return true; // aluno cadastrado com sucesso
     }
 
+    // Recupera um aluno pelo ID
     public Aluno getAlunoPorId(long id) {
         return alunos.get(id);
     }
 
-    public Map<Long, Aluno> getTodosAlunos() {
-        return alunos;
+    // Retorna todos os alunos em uma lista
+    public List<Aluno> getTodosAlunosLista() {
+        return new ArrayList<>(alunos.values());
     }
 
+    // Remove o aluno pelo ID e também limpa suas turmas associadas
     public void removerAlunoPorId(long id) {
-        alunos.remove(id);
+        alunos.remove(id);                // remove aluno
+        alunoTurmas.remove(id);           // remove vínculos com turmas
     }
 
+    // Retorna quantos alunos existem cadastrados
     public int getQuantidadeAlunos() {
         return alunos.size();
     }
     
-
+    // Adiciona uma turma ao aluno, criando a lista caso não exista e evitando duplicatas
     public void adicionarTurmaParaAluno(long alunoId, Turma turma) {
         List<Turma> turmas = alunoTurmas.getOrDefault(alunoId, new ArrayList<>());
-        turmas.add(turma);
-        alunoTurmas.put(alunoId, turmas);
+
+        if (!turmas.contains(turma)) { // evita cadastrar a mesma turma duas vezes
+            turmas.add(turma);
+            alunoTurmas.put(alunoId, turmas);
+        }
     }
 
+    // Retorna as turmas do aluno sem permitir modificações acidentais
     public List<Turma> getTurmasDoAluno(long alunoId) {
-        return alunoTurmas.getOrDefault(alunoId, new ArrayList<>());
+        List<Turma> turmas = alunoTurmas.getOrDefault(alunoId, new ArrayList<>());
+        return Collections.unmodifiableList(turmas);
     }
 
+    // Remove uma turma específica da lista de um aluno
     public void removerTurmaDoAluno(long alunoId, Turma turma) {
         List<Turma> turmas = alunoTurmas.get(alunoId);
         if (turmas != null) {
-            turmas.remove(turma);
+            turmas.remove(turma); // remove a turma da lista (se existir)
         }
     }
 
