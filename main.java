@@ -5,7 +5,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         GerenciadorLogins gerenciadorLogins = new GerenciadorLogins();
         int opcao;
-
+        
         do {
             limpartela();
             System.out.println("\n=== MENU PRINCIPAL ===");
@@ -17,12 +17,15 @@ public class Main {
 
             switch (opcao) {
                 case 1:
-                    Aluno aluno = menuAluno(scanner, gerenciadorLogins);
+                    Aluno aluno = autenticadorAluno(scanner, gerenciadorLogins);
                     if (aluno == null) {   break;  }
                     aluno.menuAluno(scanner);
                     break;
                 case 2:
-                   menuAdmin(scanner, gerenciadorLogins); 
+                    Admin adm = autenticadorAdm(scanner, gerenciadorLogins);
+                    if(adm == null) {   break;  }
+                    MenuAdmin menuAdmin = new MenuAdmin(adm);
+                    menuAdmin.abrirMenu(scanner);
                     break;
                 case 0:
                     System.out.println("Encerrando...");
@@ -34,7 +37,7 @@ public class Main {
 
         scanner.close();
     }
-    private static Aluno menuAluno(Scanner s, GerenciadorLogins gerenciadorLogins) {
+    private static Aluno autenticadorAluno(Scanner s, GerenciadorLogins gerenciadorLogins) {
         int opcao;
         Aluno aluno = null;
         do {
@@ -89,8 +92,9 @@ public class Main {
     }
 
 
-    private static void menuAdmin(Scanner s, GerenciadorLogins gerenciadorLogins) {
+    private static Admin autenticadorAdm(Scanner s, GerenciadorLogins gerenciadorLogins) {
             int opcao;
+            Admin adm = null;
             do {
                 limpartela();
                 System.out.println("\n=== MENU ADMIN ===");
@@ -109,7 +113,7 @@ public class Main {
                         System.out.println("Digite sua Senha:");
                         pass = s.next();
                         try {
-                        gerenciadorLogins.LoginAdm(user, pass);
+                        adm = gerenciadorLogins.LoginAdm(user, pass);
                         } catch (LoginException e) {
                             System.out.println(e.getMessage());
                         }
@@ -119,7 +123,7 @@ public class Main {
                         user = s.next();
                         System.out.println("Digite sua Senha:");
                         pass = s.next();
-                        System.out.println("digite a Senha Universal:");
+                        System.out.println("Digite a Senha Universal:");
                         String senhaUniversal = s.next();
                         try {
                         gerenciadorLogins.CadastroAdm(user, pass, senhaUniversal);
@@ -139,6 +143,7 @@ public class Main {
 
             } while (opcao != 0);
             limpartela();
+            return adm;
     }
 
     private static void limpartela() {

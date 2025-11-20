@@ -4,16 +4,19 @@ import java.util.Set;
 
 public class Professor {
     private String nome;
-    private long id;
+    private final long id;
     private Agenda agenda = new Agenda();
     private Set<Curso> cursosHabilitados = new HashSet<Curso>();
+    private static long idCounter = 1;
 
     //Construtores
-    public Professor(){}
+    public Professor(){
+        this.id = idCounter++;
+    }
     
-    public Professor(String nome, long id) {
+    public Professor(String nome) {
         this.nome = nome;
-        this.id = id;
+        this.id = idCounter++;
     }
 
     //Getters e Setters
@@ -27,10 +30,6 @@ public class Professor {
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public List<Horario> getHorariosDisponiveis(DiaSemana dia) {

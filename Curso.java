@@ -6,7 +6,8 @@ public class Curso {
     private String nome;
     private double mensalidade;
     private List<Nivel> niveis;
-    private long id;
+    private final long id; 
+    private static long idCounter = 1;
    
     // Comparator para ordenar os níveis pela dificuldade
     private Comparator<Nivel> comparatorNivel = new Comparator< >() {
@@ -17,7 +18,10 @@ public class Curso {
     };
 
     //Construtores
-    public Curso(){}
+    public Curso(){
+        this.id = idCounter++;
+        this.niveis = new ArrayList<Nivel>();
+    }
 
     public Curso(String nome, double mensalidade, long id) {
         this.nome = nome;
@@ -52,10 +56,6 @@ public class Curso {
         this.mensalidade = mensalidade;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public void addNivel(Nivel nivel) {
         niveis.add(nivel);
         niveis.sort(comparatorNivel);
@@ -64,6 +64,17 @@ public class Curso {
     public void removerNivel(Nivel nivel) {
         if (niveis.contains(nivel)){
         niveis.remove(nivel);
+        }
+    }
+
+    public int getQuantidadeNiveis() {
+        return niveis.size();
+    }
+
+    public void listarNiveis() {
+        System.out.println("Níveis do curso " + nome + ":");
+        for (Nivel nivel : niveis) {
+            System.out.println(nivel.getNomeNivel() + " - " + nivel.getDificuldade());
         }
     }
 }

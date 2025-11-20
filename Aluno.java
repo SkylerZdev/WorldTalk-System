@@ -2,13 +2,20 @@ import java.util.Scanner;
 
 public class Aluno {
     private String nome;
+    private final long id;
     private String senha;
+    private boolean isVip;
+    private static long idCounter = 1; // Contador simples para gerar IDs únicos
 
-    public Aluno(){}
+    public Aluno(){
+        this.id = idCounter++;
+    }
 
     public Aluno(String nome, String senha) {
         this.nome = nome;
         this.senha = senha;
+        this.id = idCounter++;
+        this.isVip = false;
     }
 
     public void menuAluno(Scanner scanner) {
@@ -47,6 +54,18 @@ public class Aluno {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public boolean isVip() {
+        return isVip;
+    }
+
+    public void setVip(boolean isVip) {
+        this.isVip = isVip;
+    }
+
+    public long getId() {
+        return id;
     }
 
     private static void limpartela() {
