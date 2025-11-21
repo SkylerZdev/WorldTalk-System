@@ -1,6 +1,12 @@
+package src.modelos;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import src.agenda.Agenda;
+import src.agenda.DiaSemana;
+import src.agenda.Horario;
+import src.agenda.HorarioPermitido;
 
 public class Professor {
     private String nome;

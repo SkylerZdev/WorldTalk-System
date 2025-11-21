@@ -1,3 +1,4 @@
+package src.modelos;
 public class Emprestimo {
     private MaterialBB material;
     private Aluno aluno;

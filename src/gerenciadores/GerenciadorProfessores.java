@@ -1,4 +1,8 @@
+package src.gerenciadores;
 import java.util.Map;
+
+import src.modelos.Professor;
+
 import java.util.HashMap;
 
 public class GerenciadorProfessores {

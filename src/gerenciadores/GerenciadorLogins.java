@@ -1,5 +1,11 @@
+package src.gerenciadores;
 import java.util.HashMap;
 import java.util.Map;
+
+import src.exceptions.CadastroException;
+import src.exceptions.LoginException;
+import src.modelos.Admin;
+import src.modelos.Aluno;
 
 
 //Gerenciador de Logins para Admins e Alunos

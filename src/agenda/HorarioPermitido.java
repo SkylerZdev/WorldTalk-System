@@ -1,3 +1,4 @@
+package src.agenda;
 public enum HorarioPermitido {
     H8_10(8,10),
     H10_12(10,12),

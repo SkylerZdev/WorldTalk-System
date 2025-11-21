@@ -1,4 +1,9 @@
+package src.gerenciadores;
 import java.util.Map;
+
+import src.modelos.Curso;
+import src.modelos.Turma;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;

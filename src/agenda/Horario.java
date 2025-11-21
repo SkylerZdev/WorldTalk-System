@@ -1,3 +1,4 @@
+package src.agenda;
 public class Horario {
     private boolean disponivel;
     private HorarioPermitido horarioPermitido;

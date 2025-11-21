@@ -1,3 +1,4 @@
+package src.modelos;
 import java.util.Scanner;
 
 public class Aluno {

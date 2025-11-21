@@ -1,3 +1,4 @@
+package src.agenda;
 public enum DiaSemana {
     SEGUNDA,
     TERCA,

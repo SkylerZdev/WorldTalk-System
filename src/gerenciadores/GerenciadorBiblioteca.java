@@ -1,4 +1,8 @@
+package src.gerenciadores;
 import java.util.Map;
+
+import src.modelos.MaterialBB;
+
 import java.util.HashMap;
 
 public class GerenciadorBiblioteca {

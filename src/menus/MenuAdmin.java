@@ -1,4 +1,7 @@
+package src.menus;
 import java.util.Scanner;
+
+import src.modelos.Admin;
 
 public class MenuAdmin {
 

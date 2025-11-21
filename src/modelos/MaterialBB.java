@@ -1,3 +1,4 @@
+package src.modelos;
 public class MaterialBB {
     private String titulo;
     private String idioma;

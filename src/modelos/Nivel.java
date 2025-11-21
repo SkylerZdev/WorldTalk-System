@@ -1,3 +1,4 @@
+package src.modelos;
 //Classe suporte para representar o nível de um curso.
 
 public class Nivel {

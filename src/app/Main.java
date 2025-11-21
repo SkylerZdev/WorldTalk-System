@@ -1,12 +1,22 @@
+package src.app;
 import java.util.Scanner;
+
+import src.agenda.*;
+import src.exceptions.*;
+import src.modelos.*;
+import src.gerenciadores.*;
+import src.menus.*;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         GerenciadorLogins gerenciadorLogins = new GerenciadorLogins();
-        //  GerenciadorCursos gerenciadorCursos = new GerenciadorCursos();                      Posteriormente Utilizados
-        //  GerenciadorAlunos gerenciadorAlunos = new GerenciadorAlunos();                      Posteriormente Utilizados
-        //  GerenciadorProfessores gerenciadorProfessores = new GerenciadorProfessores();       Posteriormente Utilizados
+        GerenciadorCursos gerenciadorCursos = new GerenciadorCursos();               
+        GerenciadorAlunos gerenciadorAlunos = new GerenciadorAlunos();               
+        GerenciadorProfessores gerenciadorProfessores = new GerenciadorProfessores();
+        GerenciadorBiblioteca gerenciadorBiblioteca = new GerenciadorBiblioteca();
+        GerenciadorEmprestimos gerenciadorEmprestimos = new GerenciadorEmprestimos();
+        GerenciadorTurmas gerenciadorTurmas = new GerenciadorTurmas();
         
 
         int opcao;
