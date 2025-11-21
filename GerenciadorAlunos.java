@@ -20,7 +20,6 @@ public class GerenciadorAlunos {
         return true; // aluno cadastrado com sucesso
     }
 
-    // Recupera um aluno pelo ID
     public Aluno getAlunoPorId(long id) {
         return alunos.get(id);
     }
@@ -43,9 +42,8 @@ public class GerenciadorAlunos {
     
     // Adiciona uma turma ao aluno, criando a lista caso não exista e evitando duplicatas
     public void adicionarTurmaParaAluno(long alunoId, Turma turma) {
-        List<Turma> turmas = alunoTurmas.getOrDefault(alunoId, new ArrayList<>());
-
-        if (!turmas.contains(turma)) { // evita cadastrar a mesma turma duas vezes
+        List<Turma> turmas = alunoTurmas.computeIfAbsent(alunoId,k-> new ArrayList<>());
+        if (!turmas.contains(turma)) { // evita colocar a mesma turma duas vezes
             turmas.add(turma);
             alunoTurmas.put(alunoId, turmas);
         }

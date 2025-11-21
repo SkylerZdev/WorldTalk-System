@@ -10,15 +10,15 @@ public class Curso {
     private static long idCounter = 1;
    
     // Comparator para ordenar os níveis pela dificuldade
-    private Comparator<Nivel> comparatorNivel = new Comparator< >() {
+    private Comparator<Nivel> comparatorNivel = new Comparator<>() {
         @Override
         public int compare(Nivel n1, Nivel n2) {
             return n1.getDificuldade().compareTo(n2.getDificuldade());
         }
     };
 
-    //Construtores
-    public Curso(){
+    // Construtores
+    public Curso() {
         this.id = idCounter++;
         this.niveis = new ArrayList<Nivel>();
     }
@@ -32,6 +32,10 @@ public class Curso {
 
     // Getters
     public String getInfoBase() {
+        return nome;
+    }
+
+    public String getNome() {
         return nome;
     }
 
@@ -62,8 +66,8 @@ public class Curso {
     }
 
     public void removerNivel(Nivel nivel) {
-        if (niveis.contains(nivel)){
-        niveis.remove(nivel);
+        if (niveis.contains(nivel)) {
+            niveis.remove(nivel);
         }
     }
 
