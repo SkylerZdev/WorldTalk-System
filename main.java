@@ -4,6 +4,11 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         GerenciadorLogins gerenciadorLogins = new GerenciadorLogins();
+        //  GerenciadorCursos gerenciadorCursos = new GerenciadorCursos();                      Posteriormente Utilizados
+        //  GerenciadorAlunos gerenciadorAlunos = new GerenciadorAlunos();                      Posteriormente Utilizados
+        //  GerenciadorProfessores gerenciadorProfessores = new GerenciadorProfessores();       Posteriormente Utilizados
+        
+
         int opcao;
         
         do {
