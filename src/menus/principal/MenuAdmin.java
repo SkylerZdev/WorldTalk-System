@@ -2,6 +2,7 @@ package src.menus.principal;
 import java.util.Scanner;
 
 import src.app.ContextoSistema;
+import src.menus.admin.MenuBiblioteca;
 import src.modelos.Admin;
 
 public class MenuAdmin {
@@ -21,7 +22,7 @@ public class MenuAdmin {
 
         int opcao;
         do {
-            limpartela();
+            //limpartela();
             System.out.println("Seja bem-vindo, " + adm.getUsuario());
             System.out.println("");
             System.out.println("\n--- Menu Administrador ---");
@@ -29,7 +30,7 @@ public class MenuAdmin {
             System.out.println("2 - Gerenciar Professores");
             System.out.println("3 - Gerenciar Biblioteca Virtual");
             System.out.println("4 - Gerenciar Alunos");
-            System.out.println("0 - Voltar");
+            System.out.println("0 - Deslogar");
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
 
@@ -41,12 +42,14 @@ public class MenuAdmin {
                     //Menu de Professores
                     break;
                 case 3:
-                    //Menu de Biblioteca Virtual
+                    MenuBiblioteca menuBiblioteca = new MenuBiblioteca(sistema, scanner);
+                    menuBiblioteca.abrirMenu();
                     break;
                 case 4:
                     //Menu de Alunos
                     break;
                 case 0:
+                    System.out.println("Deslogando...");
                     break;
                 default:
                     System.out.println("Opção inválida.");

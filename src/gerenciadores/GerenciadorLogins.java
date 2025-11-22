@@ -10,24 +10,27 @@ import src.modelos.Aluno;
 
 //Gerenciador de Logins para Admins e Alunos
 public class GerenciadorLogins {
-    String senhaUniversal;
+    private String senhaUniversal;
+    private boolean senhaUniversalDefinida = false;
     Map<String, Admin> admins = new HashMap<>();
     Map<String, Aluno> alunos = new HashMap<>();
 
     // Define a senha universal apenas uma vez
     public void DefinirSenhaUniversal(String senha) {
-        if (senhaUniversal != null) {
+        if (senhaUniversalDefinida) {
             System.out.println("Senha universal já definida.");
             return;
         }
+        this.senhaUniversalDefinida = true;
         this.senhaUniversal = senha;
+    }
+
+    public boolean isSenhaUniversalDefinida() {
+        return senhaUniversalDefinida;
     }
 
     //Cadastro e Login para Admins.
     public void CadastroAdm (String usuario, String senha, String senhaUniversal) throws CadastroException {
-        if (this.senhaUniversal == null) {
-            throw new CadastroException("Senha universal não definida.");
-        }
         if (!senhaUniversal.equals(this.senhaUniversal)) {
             throw new CadastroException("Senha universal incorreta.");
         }

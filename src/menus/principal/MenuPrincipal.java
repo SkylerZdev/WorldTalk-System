@@ -2,6 +2,7 @@ package src.menus.principal;
 
 import java.util.Scanner;
 
+import src.app.ContextoSistema;
 import src.exceptions.*;
 import src.gerenciadores.GerenciadorLogins;
 import src.modelos.Admin;
@@ -11,8 +12,17 @@ public class MenuPrincipal {
 
     public void abrirMenu(Scanner scanner, src.app.ContextoSistema sistema) {
         int opcao;
+        GerenciadorLogins g = sistema.getGerenciadorLogins();
+
+        //Criação de um admin padrão para testes
+        g.DefinirSenhaUniversal("1");
+        try {
+            g.CadastroAdm("1", "2", "1");
+        } catch (CadastroException e) {
+            System.out.println(e.getMessage());
+        }
         do {
-            limpartela();
+            //limpartela();
             System.out.println("\n=== MENU PRINCIPAL ===");
             System.out.println("1 - Perfil Aluno");
             System.out.println("2 - Perfil Administrador");
@@ -27,10 +37,7 @@ public class MenuPrincipal {
                     aluno.menuAluno(scanner);
                     break;
                 case 2:
-                    Admin adm = autenticadorAdm(scanner, sistema.getGerenciadorLogins());
-                    if(adm == null) {   break;  }
-                    MenuAdmin menuAdmin = new MenuAdmin(adm, sistema);
-                    menuAdmin.abrirMenu(scanner);
+                    autenticadorAdm(scanner, sistema);
                     break;
                 case 0:
                     System.out.println("Encerrando...");
@@ -41,14 +48,16 @@ public class MenuPrincipal {
         } while (opcao != 0);
     }
 
-    private Admin autenticadorAdm(Scanner s, GerenciadorLogins gerenciadorLogins) {
+    private void autenticadorAdm(Scanner s, ContextoSistema sistema) {
             int opcao;
             Admin adm = null;
+            GerenciadorLogins gerenciadorLogins = sistema.getGerenciadorLogins();
             do {
                 limpartela();
                 System.out.println("\n=== MENU ADMIN ===");
                 System.out.println("1 - Login");
                 System.out.println("2 - Cadastrar-se");
+                System.out.println("3 - Definir Senha Universal");
                 System.out.println("0 - Voltar ao Menu Principal");
                 System.out.print("Escolha uma opção: ");
                 opcao = s.nextInt();
@@ -65,9 +74,16 @@ public class MenuPrincipal {
                         adm = gerenciadorLogins.LoginAdm(user, pass);
                         } catch (LoginException e) {
                             System.out.println(e.getMessage());
+                            break;
                         }
+                        MenuAdmin menuAdmin = new MenuAdmin(adm, sistema);
+                        menuAdmin.abrirMenu(s);
                         break;
                     case 2:
+                        if (!gerenciadorLogins.isSenhaUniversalDefinida()) {
+                            System.out.println("Senha universal não definida. Por Favor, Defina-a primeiro:");
+                            break;
+                        }
                         System.out.println("Digite seu Usuario:");
                         user = s.next();
                         System.out.println("Digite sua Senha:");
@@ -83,6 +99,15 @@ public class MenuPrincipal {
                             System.out.println(e.getMessage());
                         }
                         break;
+                    case 3:
+                        if(gerenciadorLogins.isSenhaUniversalDefinida()) {
+                            System.out.println("Senha universal já definida.");
+                            break;
+                        }
+                        System.out.println("Digite a Senha Universal desejada:");
+                        String novaSenhaUniversal = s.next();
+                        gerenciadorLogins.DefinirSenhaUniversal(novaSenhaUniversal);
+                        System.out.println("Senha universal definida com sucesso!");
                     case 0:
                         System.out.println("Voltando ao Menu Principal...");
                         break;
@@ -90,9 +115,8 @@ public class MenuPrincipal {
                         System.out.println("Opção inválida.");
                 }
 
+                limpartela();
             } while (opcao != 0);
-            limpartela();
-            return adm;
     }
 
     private Aluno autenticadorAluno(Scanner s, GerenciadorLogins gerenciadorLogins) {
