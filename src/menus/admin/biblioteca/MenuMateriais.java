@@ -15,14 +15,10 @@ public class MenuMateriais {
         this.scanner = scanner;
     }
 
-    //MenuCursos / MenuProfessores / MenuBiblioteca / MenuAlunos
-    // Implementar posteriormente
-
     public void abrirMenu() {
 
         int opcao;
         do {
-            //limpartela();
             System.out.println("");
             System.out.println("\n--- Gerenciar Materiais ---");
             System.out.println("1 - Adicionar Material");
@@ -59,7 +55,6 @@ public class MenuMateriais {
     }
 
     private void adicionarMaterial() {
-        //limpartela();
         scanner.nextLine();
         System.out.println("Digite o título do material:");
         String titulo = scanner.nextLine();
@@ -74,7 +69,6 @@ public class MenuMateriais {
     }
 
     private void editarMaterial() {
-        //limpartela();
         sistema.getGerenciadorBiblioteca().ListarMateriais();
         System.out.println("Digite o ID do material que deseja editar:");
         long id = scanner.nextLong();
@@ -119,7 +113,6 @@ public class MenuMateriais {
     }
 
     private void removerMaterial() {
-        //limpartela();
         sistema.getGerenciadorBiblioteca().ListarMateriais();
         System.out.println("Digite o ID do material que deseja remover:");
         long id = scanner.nextLong();
@@ -143,9 +136,4 @@ public class MenuMateriais {
         }
     }
 
-    private static void limpartela() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
-    
 }

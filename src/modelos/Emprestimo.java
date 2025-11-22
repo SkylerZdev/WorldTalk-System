@@ -46,4 +46,9 @@ public class Emprestimo {
         this.devolvido = true;
         this.material.setDisponivel(true);
     }
+
+    @Override
+    public String toString() {
+        return "Empréstimo ID: " + id + ", Material: " + material.getTitulo() + ", Aluno: " + aluno.getNome() + ", Devolvido: " + devolvido;
+    }
 }

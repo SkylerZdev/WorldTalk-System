@@ -43,6 +43,15 @@ public class GerenciadorBiblioteca {
         }
     }
 
+    public void ListarMateriaisDisponiveis() {
+        for (MaterialBB mat : material.values()) {
+            if(!mat.isAtivo() || !mat.isDisponivel()) {
+                continue;
+            }
+            System.out.println("ID: " + mat.getIdMaterial() + ", Título: " + mat.getTitulo() + ", Idioma: " + mat.getIdioma() + ", Exclusivo VIP: " + mat.isExclusivoVip());
+        }
+    }
+
     public void removerMaterialPorId(long id) {
         MaterialBB m = material.get(id);
         m.setAtivo(false);
@@ -53,6 +62,16 @@ public class GerenciadorBiblioteca {
         int count = 0;
         for (MaterialBB mat : material.values()) {
             if (mat.isAtivo()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int getQuantidadeMateriaisDisponiveis() {
+        int count = 0;
+        for (MaterialBB mat : material.values()) {
+            if (mat.isAtivo() && mat.isDisponivel()) {
                 count++;
             }
         }

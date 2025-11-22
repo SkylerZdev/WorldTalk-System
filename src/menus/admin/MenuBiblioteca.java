@@ -1,7 +1,7 @@
 package src.menus.admin;
 import java.util.Scanner;
 import src.app.ContextoSistema;
-import src.menus.admin.biblioteca.MenuMateriais;
+import src.menus.admin.biblioteca.*;
 
 public class MenuBiblioteca {
 
@@ -20,7 +20,7 @@ public class MenuBiblioteca {
 
         int opcao;
         do {
-            //limpartela();
+
             System.out.println("");
             System.out.println("\n--- Biblioteca Virtual ---");
             System.out.println("1 - Gerenciar Materiais");
@@ -35,7 +35,8 @@ public class MenuBiblioteca {
                     menuMateriais.abrirMenu();
                     break;
                 case 2:
-                    //Menu de Emprestimos
+                    MenuEmprestimos menuEmprestimos = new MenuEmprestimos(sistema, scanner);
+                    menuEmprestimos.abrirMenu();
                     break;
                 case 0:
                     break;
@@ -45,8 +46,4 @@ public class MenuBiblioteca {
         } while (opcao != 0);
     }
 
-    private static void limpartela() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
 }

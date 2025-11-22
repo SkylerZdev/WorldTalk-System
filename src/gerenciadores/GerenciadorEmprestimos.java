@@ -34,8 +34,6 @@ public class GerenciadorEmprestimos {
         return true; // Empréstimo adicionado com sucesso
     }
 
-   
-
     public void concluirEmprestimo(long id) {
         Emprestimo emprestimo = emprestimos.get(id);
         if (emprestimo != null && emprestimosAtivos.contains(emprestimo)) {
@@ -74,6 +72,12 @@ public class GerenciadorEmprestimos {
 
     public Emprestimo getEmprestimoPorId(long id) {
     return emprestimos.get(id);
+    }
+
+    public void listarEmprestimosAtivos(){
+        for (Emprestimo e : emprestimosAtivos){
+            System.out.println(e.toString());
+        }
     }
 
     public Map<Long, Emprestimo> getTodosEmprestimos() {

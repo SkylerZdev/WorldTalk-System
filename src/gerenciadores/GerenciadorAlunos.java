@@ -60,6 +60,24 @@ public class GerenciadorAlunos {
         return Collections.unmodifiableList(turmas);
     }
 
+    public boolean alunoExiste(long alunoId) {
+        return alunos.containsKey(alunoId);
+    }
+
+    public void listarAlunos() {
+        for (Aluno aluno : alunos.values()) {
+            System.out.println("ID: " + aluno.getId() + ", Nome: " + aluno.getNome() + ", VIP: " + aluno.isVip());
+        }
+    }
+
+    public void listarAlunosVip() {
+        for (Aluno aluno : alunos.values()) {
+            if (aluno.isVip()) {
+                System.out.println("ID: " + aluno.getId() + ", Nome: " + aluno.getNome());
+            }
+        }
+    }
+
     // Remove uma turma específica da lista de um aluno
     public void removerTurmaDoAluno(long alunoId, Turma turma) {
         List<Turma> turmas = alunoTurmas.get(alunoId);

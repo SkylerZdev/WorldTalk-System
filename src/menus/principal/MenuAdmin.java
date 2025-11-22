@@ -22,7 +22,6 @@ public class MenuAdmin {
 
         int opcao;
         do {
-            //limpartela();
             System.out.println("Seja bem-vindo, " + adm.getUsuario());
             System.out.println("");
             System.out.println("\n--- Menu Administrador ---");
@@ -55,11 +54,6 @@ public class MenuAdmin {
                     System.out.println("Opção inválida.");
             }
         } while (opcao != 0);
-    }
-
-    private static void limpartela() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
     }
     
 }
