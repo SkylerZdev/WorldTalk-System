@@ -6,6 +6,7 @@ import src.app.ContextoSistema;
 import src.exceptions.LoginException;
 import src.gerenciadores.GerenciadorLogins;
 import src.modelos.Aluno;
+import src.modelos.Curso;
 
 public class MenuAluno {
     Scanner scanner;
@@ -82,6 +83,8 @@ public class MenuAluno {
             System.out.println("\n=== MENU DO ALUNO ===");
             System.out.println("Aluno: " + aluno.getNome() + (aluno.isVip() ? " (VIP)" : ""));
             System.out.println("1 - Ver opções da biblioteca (placeholder)");
+            System.out.println("2 - Ver Cursos Disponiveis");
+            System.out.println("3 - Realizar Pre-Inscrição");
             System.out.println("0 - Sair da conta");
             System.out.print("Escolha uma opção: ");
 
@@ -95,10 +98,47 @@ public class MenuAluno {
 
             switch (opcao) {
                 case 1:
-                    System.out.println("Funcionalidade ainda não implementada.");
+                    if (sistema.getGerenciadorBiblioteca().getQuantidadeMateriais()==0) {
+                        System.out.println("Nenhum material cadastrado.");
+                        break;
+                    }
+                    sistema.getGerenciadorBiblioteca().ListarMateriais();
                     pausar(scanner);
                     break;
-
+                case 2:
+                    if (sistema.getGerenciadorCursos().getQuantidadeCursos() == 0){
+                        System.out.println("Nenhum Curso Cadastrado");
+                        break;
+                    } 
+                    sistema.getGerenciadorCursos().listarCursos();
+                    break;
+                case 3:
+                    if (sistema.getGerenciadorCursos().getQuantidadeCursos() == 0){
+                        System.out.println("Nenhum Curso Cadastrado para Inscrição");
+                        break;
+                    } 
+                    sistema.getGerenciadorCursos().listarCursos();
+                    System.out.print("Digite o Id do Curso desejado: ");
+                    Curso curso = sistema.getGerenciadorCursos().getCursoPorId(scanner.nextLong());
+                    if(curso == null){
+                        System.out.println("Nenhum Curso Encontrado com esse ID");
+                        break;
+                    }
+                    boolean isCadastrado = false;
+                    for (Long l : sistema.getGerenciadorCursos().getTurmasPorCurso(curso)) {
+                        if (sistema.getGerenciadorTurmas().getTurmaPorId(l).getAlunos().contains(aluno)){
+                            System.out.println("Você ja está Cadastrado em uma turma desse Curso.");
+                            isCadastrado = true;
+                            break;
+                        }
+                    }
+                    if (isCadastrado){
+                        break;
+                    }
+                    sistema.getGerenciadorInscricoes().adicionarInscricao(aluno, curso);
+                    System.out.println("Pre-Inscrição Adicionada com Sucesso.");
+                    break;
+                
                 case 0:
                     System.out.println("Saindo da conta do aluno...");
                     pausar(scanner);

@@ -19,6 +19,7 @@ public class ContextoSistema {
     private GerenciadorProfessores gerenciadorProfessores;
     private GerenciadorEmprestimos gerenciadorEmprestimos;
     private GerenciadorTurmas gerenciadorTurmas;
+    private GerenciadorInscricoes gerenciadorInscricoes;
 
     public ContextoSistema() {
         this.gerenciadorAlunos = new GerenciadorAlunos();
@@ -28,6 +29,7 @@ public class ContextoSistema {
         this.gerenciadorProfessores = new GerenciadorProfessores();
         this.gerenciadorEmprestimos = new GerenciadorEmprestimos();
         this.gerenciadorTurmas = new GerenciadorTurmas();
+        this.gerenciadorInscricoes = new GerenciadorInscricoes();
     }
     
     public void carregarDadosDeTeste(ContextoSistema sistema) {
@@ -304,4 +306,7 @@ public class ContextoSistema {
         return gerenciadorTurmas;
     }
 
+    public GerenciadorInscricoes getGerenciadorInscricoes(){
+        return gerenciadorInscricoes;
+    }
 }

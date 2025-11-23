@@ -29,6 +29,7 @@ public class MenuAdm_Alunos {
             System.out.println("1 - Cadastrar Novo Aluno");
             System.out.println("2 - Listar Alunos");
             System.out.println("3 - Remover Aluno");
+            System.out.println("4 - Editar Aluno");
             System.out.println("0 - Voltar");
             System.out.print("Escolha uma opção: ");
 
@@ -53,11 +54,19 @@ public class MenuAdm_Alunos {
                 case 3:
                     removerAlunoADM(scanner, gAlunos, gLogins);
                     break;
-
+                
+                case 4:
+                    if (gAlunos.getQuantidadeAlunos() == 0){
+                        System.out.println("Nenhum Aluno Cadastrado para Editar");
+                        break;
+                    }
+                    System.out.println("\n--- Lista de Alunos ---");
+                    gAlunos.listarAlunos();
+                    editarAluno();
+                    break;
                 case 0:
                     System.out.println("Voltando...");
                     break;
-
                 default:
                     System.out.println("Opção inválida.");
             }
@@ -155,5 +164,46 @@ public class MenuAdm_Alunos {
             default:
                 System.out.println("Opção inválida.");
         }
+    }
+    private void editarAluno(){
+        System.out.println("Digite o ID do Aluno que deseja editar:");
+        long id = scanner.nextLong();
+        Aluno aluno = sistema.getGerenciadorAlunos().getAlunoPorId(id);
+        if (aluno == null) {
+            System.out.println("Aluno com ID " + id + " não encontrado.");
+            return;
+        }
+        
+        System.out.println("Esse é o Aluno que você deseja editar? (1 - Sim // 2 - Nao)");
+        scanner.nextLine(); 
+        System.out.println(aluno.toString());
+        int confirmacao = scanner.nextInt();
+        if (confirmacao != 1) {
+            System.out.println("Edição cancelada.");
+            return;
+        }
+        scanner.nextLine();
+        System.out.println("Digite o novo nome do Aluno (atual: " + aluno.getNome() + "):");
+        System.out.println("(Digite '-' para manter o nome atual)");
+        System.out.println("");
+        String novoNome = scanner.nextLine();
+        if (!novoNome.equals("-")) {
+            aluno.setNome(novoNome);
+        }
+
+
+        System.out.println("O Aluno é VIP? (1 - Sim // 2 - Não // 3 - Manter atual)");
+        int exclusivoVipInput = scanner.nextInt();
+        if (exclusivoVipInput == 1) {
+            if(!aluno.isVip()){
+                sistema.getGerenciadorInscricoes().tornarVip(aluno);
+            }
+            aluno.setVip(true);
+        } else if (exclusivoVipInput == 2) {
+            if (aluno.isVip()){
+                sistema.getGerenciadorInscricoes().tornarNormal(aluno);
+            }
+        } // Se for 3, mantém o valor atual
+        System.out.println("Aluno editado com sucesso.");
     }
 }

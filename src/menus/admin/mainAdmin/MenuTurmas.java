@@ -135,7 +135,9 @@ public class MenuTurmas {
             System.out.println("Nenhum professor identificado com esse ID");
             return;
         }
-        gerenciador.adicionarTurma(new Turma(curso, nivel, prof, limiteAlunos, agenda));
+        Turma t = new Turma(curso, nivel, prof, limiteAlunos, agenda);
+        gerenciador.adicionarTurma(t);
+        sistema.getGerenciadorCursos().adicionarTurmaPorId(curso.getId(), t);
         System.out.println("Turma Cadastrada com Sucesso.");
 
 

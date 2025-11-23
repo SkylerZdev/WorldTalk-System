@@ -1,5 +1,7 @@
 package src.modelos;
 
+import java.util.Objects;
+
 public class Aluno {
 
     private String nome;
@@ -61,6 +63,19 @@ public class Aluno {
     }
 
     // ------------------ REPRESENTAÇÃO DO OBJETO ------------------
+
+    @Override
+    public boolean equals(Object o){
+        if (this == o){   return true;  }
+        if (!(o instanceof Aluno) || o == null){   return false;    }
+        Aluno outro = (Aluno)o;
+        return this.id == outro.getId();
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(this.id);
+    }
 
     @Override
     public String toString() {
