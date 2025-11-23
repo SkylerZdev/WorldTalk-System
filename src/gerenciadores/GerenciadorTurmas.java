@@ -34,5 +34,11 @@ public class GerenciadorTurmas {
     public int getQuantidadeTurmas() {
         return turmas.size();
     }
+
+    public void listarTurmas(){
+        for (Turma turma : turmas.values()){
+            System.out.println(turma.toString());
+        }
+    }
     
 }

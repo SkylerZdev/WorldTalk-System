@@ -12,7 +12,6 @@ import java.util.Collections;
 public class GerenciadorCursos {
 
     private Map<Long, Curso> cursos = new HashMap<>();
-
     private Map<Curso, List<Turma>> turmas = new HashMap<>();
     
     public GerenciadorCursos() {}

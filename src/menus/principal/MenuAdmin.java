@@ -123,6 +123,7 @@ public class MenuAdmin {
             System.out.println("2 - Gerenciar Professores");
             System.out.println("3 - Gerenciar Biblioteca Virtual");
             System.out.println("4 - Gerenciar Alunos");
+            System.out.println("5 - Gerenciar Turmas");
             System.out.println("0 - Deslogar");
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
@@ -146,7 +147,10 @@ public class MenuAdmin {
                     MenuAdm_Alunos menuAluno = new MenuAdm_Alunos(sistema, scanner);
                     menuAluno.abrirMenuAluno();
                     break;
-
+                    
+                case 5:
+                    //MenuTurmas menuTurmas = new MenuTurmas(sistema, scanner);
+                    //menuTurmas.abrirMenu();
                 case 0:
                     System.out.println("Deslogando...");
                     break;

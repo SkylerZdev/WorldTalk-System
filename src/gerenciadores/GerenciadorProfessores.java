@@ -36,4 +36,9 @@ public class GerenciadorProfessores {
         return professores.size();
     }
 
+    public void listarProfessores() {
+        for (Professor professor : professores.values()) {
+            System.out.println(professor.toString());
+        }
+    }
 }

@@ -52,31 +52,17 @@ public class Professor {
 
     // Métodos para gerenciar horários na agenda
     public boolean ocuparHorario(DiaSemana dia, HorarioPermitido horario) {
-        List<Horario> horariosDia = agenda.getHorariosPorDia().get(dia);
-        for (Horario h : horariosDia) {
-            if (h.getHorarioPermitido() == horario) {
-                if(!h.isDisponivel()) {
-                    return false; // Horário já ocupado
-                }
-                h.setDisponivel(false);
-                return true; // Horário ocupado com sucesso
-            }
-        }
-        return false; // Horário não encontrado
+        return agenda.ocuparHorario(dia, horario);
     }
     
     public boolean liberarHorario(DiaSemana dia, HorarioPermitido horario) {
-        List<Horario> horariosDia = agenda.getHorariosPorDia().get(dia);
-        for (Horario h : horariosDia) {
-            if (h.getHorarioPermitido() == horario) {
-                if(h.isDisponivel()) {
-                    return false; // Horário já livre
-                }
-                h.setDisponivel(true);
-                return true; // Horário liberado com sucesso
-            }
-        }
-        return false; // Horário não encontrado
+        return agenda.liberarHorario(dia, horario);
+    }
+    
+
+    @Override
+    public String toString(){
+        return "Id: " + id + " / Nome: " + nome;
     }
 
 }
