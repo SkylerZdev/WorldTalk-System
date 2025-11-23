@@ -1,4 +1,4 @@
-package src.menus;
+package src.menus.principal;
 
 import java.util.Scanner;
 
@@ -8,13 +8,19 @@ import src.gerenciadores.GerenciadorLogins;
 import src.modelos.Aluno;
 
 public class MenuAluno {
+    Scanner scanner;
+    ContextoSistema sistema;
+
+    public MenuAluno(Scanner scanner, ContextoSistema sistema){
+        this.scanner = scanner;
+        this.sistema = sistema;
+    }
 
     // Menu inicial da área do aluno
-    public void abrirMenu(Scanner scanner, ContextoSistema sistema) {
+    public void abrirMenu() {
         int opcao;
 
         do {
-            limpartela();
             System.out.println("\n=== ÁREA DO ALUNO ===");
             System.out.println("1 - Login");
             System.out.println("0 - Voltar ao Menu Principal");
@@ -31,7 +37,7 @@ public class MenuAluno {
 
             switch (opcao) {
                 case 1:
-                    realizarLogin(scanner, sistema);
+                    realizarLogin();
                     break;
 
                 case 0:
@@ -47,10 +53,9 @@ public class MenuAluno {
     }
 
     // Faz o login do aluno usando o GerenciadorLogins
-    private void realizarLogin(Scanner scanner, ContextoSistema sistema) {
+    private void realizarLogin() {
         GerenciadorLogins gerenciadorLogins = sistema.getGerenciadorLogins();
 
-        limpartela();
         System.out.println("\n=== LOGIN DO ALUNO ===");
         System.out.print("Usuário: ");
         String user = scanner.nextLine();
@@ -62,7 +67,7 @@ public class MenuAluno {
             Aluno aluno = gerenciadorLogins.LoginAluno(user, pass);
             System.out.println("\nLogin realizado com sucesso! Bem-vindo, " + aluno.getNome() + "!");
             pausar(scanner);
-            menuAlunoLogado(scanner, sistema, aluno);
+            menuAlunoLogado(aluno);
         } catch (LoginException e) {
             System.out.println("\nErro no login: " + e.getMessage());
             pausar(scanner);
@@ -70,11 +75,10 @@ public class MenuAluno {
     }
 
     // Menu que aparece depois que o aluno está logado
-    private void menuAlunoLogado(Scanner scanner, ContextoSistema sistema, Aluno aluno) {
+    private void menuAlunoLogado(Aluno aluno) {
         int opcao;
 
         do {
-            limpartela();
             System.out.println("\n=== MENU DO ALUNO ===");
             System.out.println("Aluno: " + aluno.getNome() + (aluno.isVip() ? " (VIP)" : ""));
             System.out.println("1 - Ver opções da biblioteca (placeholder)");
@@ -106,12 +110,6 @@ public class MenuAluno {
             }
 
         } while (opcao != 0);
-    }
-
-    // Utilitários de tela
-    private static void limpartela() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
     }
 
     private static void pausar(Scanner scanner) {
