@@ -3,6 +3,7 @@ import src.agenda.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Turma {
 
@@ -14,6 +15,7 @@ public class Turma {
     private Nivel nivel;
     private Professor professor;
     private static long idCounter = 1;
+    private Map<Long, List<Double>> notasPorAluno;
 
     //Construtores
     public Turma(Curso curso, Nivel nivel, Professor professor, int limiteAlunos, Agenda agenda) {
@@ -29,6 +31,10 @@ public class Turma {
     //getters
     public Agenda getAgenda(){
         return agenda;
+    }
+
+    public Map<Long, List<Double>> getNotasAlunos(){
+        return notasPorAluno;
     }
 
     public long getId() {
@@ -82,6 +88,9 @@ public class Turma {
 
     public void setAlunos(List<Aluno> alunos) {
         this.alunos = alunos;
+        for (Aluno aluno : alunos) {
+            notasPorAluno.computeIfAbsent(aluno.getId(), k -> new ArrayList<>());
+        }
     }
 
     public void setLimiteAlunos(int limite){
@@ -91,6 +100,7 @@ public class Turma {
     public boolean addAluno(Aluno aluno) {
         if(alunos.size()< limiteAlunos){
             this.alunos.add(aluno);
+            notasPorAluno.computeIfAbsent(aluno.getId(), k -> new ArrayList<>());
             return true;
         }
         return false;
@@ -99,9 +109,37 @@ public class Turma {
     public boolean addAlunos(List<Aluno> lista){
         if(getVagasDisponiveis() >= lista.size()){
             this.alunos.addAll(lista);
+            for (Aluno aluno : lista) {
+                notasPorAluno.computeIfAbsent(aluno.getId(),k -> new ArrayList<>());
+            }
             return true;
         }
         return false;
+    }
+
+    public void adicionarNota(long idAluno, double nota){
+        if(!notasPorAluno.containsKey(idAluno)){
+            return;
+        }
+        notasPorAluno.get(idAluno).add(nota);
+    }
+
+    public List<Double> getNotasAluno(long idAluno){
+        if (!notasPorAluno.containsKey(idAluno)){
+            return new ArrayList<>();
+        }
+        return notasPorAluno.get(idAluno);
+    }
+
+    public double getMediaAluno(long idAluno){
+        double media = 0;
+        if (!notasPorAluno.containsKey(idAluno)){
+            return media;
+        }
+        for (Double nota : notasPorAluno.get(idAluno)) {
+            media += nota;
+        }
+        return media/notasPorAluno.get(idAluno).size();
     }
 
     public void removeAluno(Aluno aluno) {

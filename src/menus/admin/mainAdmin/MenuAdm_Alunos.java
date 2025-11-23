@@ -30,6 +30,7 @@ public class MenuAdm_Alunos {
             System.out.println("2 - Listar Alunos");
             System.out.println("3 - Remover Aluno");
             System.out.println("4 - Editar Aluno");
+            // Adicionar Notas.
             System.out.println("0 - Voltar");
             System.out.print("Escolha uma opção: ");
 

@@ -7,6 +7,7 @@ import src.exceptions.LoginException;
 import src.gerenciadores.GerenciadorLogins;
 import src.modelos.Aluno;
 import src.modelos.Curso;
+import src.modelos.Turma;
 
 public class MenuAluno {
     Scanner scanner;
@@ -82,9 +83,10 @@ public class MenuAluno {
         do {
             System.out.println("\n=== MENU DO ALUNO ===");
             System.out.println("Aluno: " + aluno.getNome() + (aluno.isVip() ? " (VIP)" : ""));
-            System.out.println("1 - Ver opções da biblioteca (placeholder)");
+            System.out.println("1 - Ver Materiais da Biblioteca");
             System.out.println("2 - Ver Cursos Disponiveis");
             System.out.println("3 - Realizar Pre-Inscrição");
+            System.out.println("4 - Checar Notas");
             System.out.println("0 - Sair da conta");
             System.out.print("Escolha uma opção: ");
 
@@ -139,6 +141,19 @@ public class MenuAluno {
                     System.out.println("Pre-Inscrição Adicionada com Sucesso.");
                     break;
                 
+                case 4:
+                    if (sistema.getGerenciadorAlunos().getTurmasDoAluno(aluno.getId()).isEmpty()){
+                        System.out.println("Nenhum Curso Cadastrado");
+                        break;
+                    }
+                    for (Turma t : sistema.getGerenciadorAlunos().getTurmasDoAluno(aluno.getId())){
+                        System.out.println("Curso: " + t.getCurso().getNome());
+                        int x = 1;
+                        for (double nota : t.getNotasAluno(aluno.getId())) {
+                            System.out.println("P" + x++ + " | " + nota);
+                        }
+                    }
+
                 case 0:
                     System.out.println("Saindo da conta do aluno...");
                     pausar(scanner);
