@@ -1,4 +1,5 @@
 package src.gerenciadores;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,8 +13,8 @@ import src.modelos.Aluno;
 public class GerenciadorLogins {
     private String senhaUniversal;
     private boolean senhaUniversalDefinida = false;
-    Map<String, Admin> admins = new HashMap<>();
-    Map<String, Aluno> alunos = new HashMap<>();
+    private Map<String, Admin> admins = new HashMap<>();
+    private Map<String, Aluno> alunos = new HashMap<>();
 
     // Define a senha universal apenas uma vez
     public void DefinirSenhaUniversal(String senha) {
@@ -73,5 +74,19 @@ public class GerenciadorLogins {
         }
         return aluno;
     }
-    
+
+    // Retorna o aluno associado ao usuário
+    public Aluno getAlunoPorUsuario(String usuario) {
+        return alunos.get(usuario);
+    }
+
+    // Remove aluno pelo usuário
+    public boolean removerAlunoPorUsuario(String usuario) {
+        return alunos.remove(usuario) != null;
+    }
+
+    // Retorna o mapa de alunos
+    public Map<String, Aluno> getAlunos() {
+        return alunos;
+    }
 }

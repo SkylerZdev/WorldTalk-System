@@ -1,14 +1,15 @@
 package src.modelos;
-import java.util.Scanner;
 
 public class Aluno {
+
     private String nome;
     private final long id;
     private String senha;
     private boolean isVip;
-    private static long idCounter = 1; // Contador simples para gerar IDs únicos
 
-    public Aluno(){
+    private static long idCounter = 1; // Gerador de IDs únicos
+
+    public Aluno() {
         this.id = idCounter++;
     }
 
@@ -19,28 +20,8 @@ public class Aluno {
         this.isVip = false;
     }
 
-    public void menuAluno(Scanner scanner) {
-        int opcao;
-        do {
-            limpartela();
-            System.out.println("\n--- Menu Aluno ---");
-            System.out.println("1 -  -");
-            System.out.print("Escolha uma opção: ");
-            opcao = scanner.nextInt();
+    // ------------------ GETTERS E SETTERS ------------------
 
-            switch (opcao) {
-                case 1:
-                    //Definir Posteriormente
-                    break;
-                case 0:
-                    break;
-                default:
-                    System.out.println("Opção inválida.");
-            }
-        } while (opcao != 0);
-    }
-
-    // Getters e Setters
     public String getNome() {
         return nome;
     }
@@ -69,8 +50,10 @@ public class Aluno {
         return id;
     }
 
-    private static void limpartela() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
+    // ------------------ REPRESENTAÇÃO DO OBJETO ------------------
+
+    @Override
+    public String toString() {
+        return "ID: " + id + " | Nome: " + nome + (isVip ? " (VIP)" : "");
     }
 }

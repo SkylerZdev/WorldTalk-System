@@ -1,4 +1,5 @@
 package src.gerenciadores;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,7 @@ public class GerenciadorAlunos {
     public GerenciadorAlunos() {}
 
     public boolean adicionarAluno(Aluno aluno) {
-        if(alunos.containsKey(aluno.getId())) {
+        if (alunos.containsKey(aluno.getId())) {
             return false; // aluno já existe no sistema
         }
         alunos.put(aluno.getId(), aluno);
@@ -27,6 +28,24 @@ public class GerenciadorAlunos {
 
     public Aluno getAlunoPorId(long id) {
         return alunos.get(id);
+    }
+
+    // Busca aluno pelo nome
+    public Aluno getAlunoPorNome(String nome) {
+        for (Aluno a : alunos.values()) {
+            if (a.getNome().equalsIgnoreCase(nome)) {
+                return a;
+            }
+        }
+        return null; // não encontrado
+    }
+
+    // Remove aluno pelo nome
+    public boolean removerAlunoPorNome(String nome) {
+        Aluno a = getAlunoPorNome(nome);
+        if (a == null) return false;
+        removerAlunoPorId(a.getId());
+        return true;
     }
 
     // Retorna todos os alunos em uma lista
@@ -44,10 +63,10 @@ public class GerenciadorAlunos {
     public int getQuantidadeAlunos() {
         return alunos.size();
     }
-    
+
     // Adiciona uma turma ao aluno, criando a lista caso não exista e evitando duplicatas
     public void adicionarTurmaParaAluno(long alunoId, Turma turma) {
-        List<Turma> turmas = alunoTurmas.computeIfAbsent(alunoId,k-> new ArrayList<>());
+        List<Turma> turmas = alunoTurmas.computeIfAbsent(alunoId, k -> new ArrayList<>());
         if (!turmas.contains(turma)) { // evita colocar a mesma turma duas vezes
             turmas.add(turma);
             alunoTurmas.put(alunoId, turmas);
