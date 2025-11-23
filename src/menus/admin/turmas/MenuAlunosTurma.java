@@ -77,6 +77,7 @@ public class MenuAlunosTurma{
             return;
         }
         turma.addAluno(alunoID);
+        sistema.getGerenciadorAlunos().adicionarTurmaParaAluno(id, turma);
         System.out.println("Aluno Adicionado com sucesso.");
     }
 

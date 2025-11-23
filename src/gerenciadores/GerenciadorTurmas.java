@@ -38,7 +38,7 @@ public class GerenciadorTurmas {
             }
         }
     return resultado;
-}
+    }
 
 
     public void removerTurmaPorId(long id) {

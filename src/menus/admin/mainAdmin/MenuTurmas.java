@@ -35,6 +35,7 @@ public class MenuTurmas {
             System.out.println("4 - Remover Turma");
             System.out.println("5 - Gerenciar Alunos de Turma");
             System.out.println("6 - Consultar Agendas");
+            System.out.println("7 - Atualizar Vagas das Turmas");
             System.out.println("0 - Voltar");
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
@@ -75,6 +76,9 @@ public class MenuTurmas {
                     break;
                 case 6:
                     exibirAgenda();
+                    break;
+                case 7:
+                    atualizarVagas();
                     break;
                 case 0:
                     break;
@@ -256,6 +260,21 @@ public class MenuTurmas {
             } while (id != 0);
         }
         return a;
+    }
+
+    private void atualizarVagas(){
+        for (Turma t : gerenciador.getTodasTurmas().values()) {
+            Curso curso = t.getCurso();
+            int vagas = t.getVagasDisponiveis();
+            List<Aluno> novos = sistema.getGerenciadorInscricoes().puxarProximos(vagas, curso);
+            t.addAlunos(novos);
+            if(!novos.isEmpty()){
+            System.out.println("Turma: " + t.getId() + ": " + novos.size() + " alunos adicionados.");
+            }
+            for (Aluno aluno : novos) {
+                sistema.getGerenciadorAlunos().adicionarTurmaParaAluno(aluno.getId(), t);
+            }
+        }
     }
     
 

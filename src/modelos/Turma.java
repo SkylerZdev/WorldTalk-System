@@ -96,6 +96,14 @@ public class Turma {
         return false;
     }
 
+    public boolean addAlunos(List<Aluno> lista){
+        if(getVagasDisponiveis() >= lista.size()){
+            this.alunos.addAll(lista);
+            return true;
+        }
+        return false;
+    }
+
     public void removeAluno(Aluno aluno) {
         this.alunos.remove(aluno);
     }
