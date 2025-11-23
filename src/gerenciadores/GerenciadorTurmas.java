@@ -1,9 +1,12 @@
 package src.gerenciadores;
 import java.util.Map;
 
+import src.modelos.Professor;
 import src.modelos.Turma;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class GerenciadorTurmas {
 
@@ -26,6 +29,17 @@ public class GerenciadorTurmas {
     public Map<Long, Turma> getTodasTurmas() {
         return turmas;
     }
+
+    public List<Turma> getTurmasPorProfessor(Professor professor) {
+        List<Turma> resultado = new ArrayList<>();
+        for (Turma t : turmas.values()) {
+            if (t.getProfessor().equals(professor)) {
+                resultado.add(t);
+            }
+        }
+    return resultado;
+}
+
 
     public void removerTurmaPorId(long id) {
         turmas.remove(id);

@@ -9,6 +9,7 @@ import src.gerenciadores.GerenciadorLogins;
 import src.menus.admin.MenuAdm_Alunos;
 import src.menus.admin.MenuBiblioteca;
 import src.menus.admin.MenuCursos;
+import src.menus.admin.MenuProfessores;
 import src.modelos.Admin;
 
 public class MenuAdmin {
@@ -137,7 +138,8 @@ public class MenuAdmin {
                     break;
 
                 case 2:
-                    //Menu de Professores
+                    MenuProfessores menuProfessores = new MenuProfessores(scanner, sistema);
+                    menuProfessores.abrirMenu();
                     break;
 
                 case 3:

@@ -24,6 +24,12 @@ public class Professor {
         this.nome = nome;
         this.id = idCounter++;
     }
+    
+    public Professor(String nome, Set<Curso> habilitados){
+        this.nome = nome;
+        this.cursosHabilitados = habilitados;
+        this.id = idCounter++;
+    }
 
     //Getters e Setters
     public String getNome() {
@@ -50,6 +56,10 @@ public class Professor {
         this.cursosHabilitados.add(curso);
     }
 
+    public void setCursosHabilitados(Set<Curso> novosCursos) {
+        cursosHabilitados = novosCursos;
+    }
+
     // Métodos para gerenciar horários na agenda
     public boolean ocuparHorario(DiaSemana dia, HorarioPermitido horario) {
         return agenda.ocuparHorario(dia, horario);
@@ -64,5 +74,7 @@ public class Professor {
     public String toString(){
         return "Id: " + id + " / Nome: " + nome;
     }
+
+   
 
 }
