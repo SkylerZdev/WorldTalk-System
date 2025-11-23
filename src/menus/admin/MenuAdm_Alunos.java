@@ -87,19 +87,20 @@ public class MenuAdm_Alunos {
         if (escolha == 1){
             novo.setVip(true);
         }
-        // Adiciona no GerenciadorAlunos
-        boolean sucesso = gAlunos.adicionarAluno(novo);
-
-        if (!sucesso) {
-            System.out.println("Erro: Já existe um aluno com esse ID.");
-            return;
-        }
-
+        
         // Registrar login
         try {
             gLogins.CadastroAluno(novo);
         } catch (Exception e) {
             System.out.println("Erro ao registrar login: " + e.getMessage());
+            return;
+        }
+        
+        // Adiciona no GerenciadorAlunos
+        boolean sucesso = gAlunos.adicionarAluno(novo);
+
+        if (!sucesso) {
+            System.out.println("Erro: Já existe um aluno com esse ID.");
             return;
         }
 

@@ -7,12 +7,11 @@ import src.modelos.Turma;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class GerenciadorCursos {
 
     private Map<Long, Curso> cursos = new HashMap<>();
-    private Map<Curso, List<Turma>> turmas = new HashMap<>();
+    private Map<Curso, List<Long>> turmas = new HashMap<>();
     
     public GerenciadorCursos() {}
 
@@ -42,12 +41,13 @@ public class GerenciadorCursos {
         return cursos;
     }
 
-    // Remove um curso pelo ID e também apaga suas turmas associadas
-    public void removerCursoPorId(long id) {
-        Curso curso = cursos.remove(id); // remove o curso do mapa de cursos
+    // Remove um curso pelo ID e Retorna o Id das turmas associadas
+    public List<Long> removerCursoPorId(long id) {
+        Curso curso = cursos.remove(id);    // remove o curso do mapa de cursos
         if (curso != null) {
-            turmas.remove(curso);        // remove todas as turmas associadas àquele curso
+            return turmas.remove(curso);        // remove todas as turmas associadas àquele curso e retorna-as
         }
+        return new ArrayList<>();
     }
 
     // Retorna quantos cursos existem cadastrados
@@ -58,18 +58,31 @@ public class GerenciadorCursos {
     // Adiciona uma turma a um curso, criando a lista se não existir e evitando duplicatas
     public void adicionarTurma(Curso curso, Turma turma) {
         // Garante que sempre exista uma lista de turmas pro curso
-        List<Turma> listaTurmas = turmas.computeIfAbsent(curso, c -> new ArrayList<>());
+        List<Long> listaTurmas = turmas.computeIfAbsent(curso, c -> new ArrayList<>());
 
         // Evita cadastrar a mesma turma duas vezes
-        if (!listaTurmas.contains(turma)) {
-            listaTurmas.add(turma);
+        if (!listaTurmas.contains(turma.getId())) {
+            listaTurmas.add(turma.getId());
         }
     }
 
+    public boolean adicionarTurmaPorId(Long id, Turma turma){
+        Curso c = cursos.get(id);
+        if(c == null){
+            return false;
+        }
+        List<Long> lista = turmas.get(c);
+        if (lista.contains(turma.getId())){
+            return false;
+        }
+        lista.add(turma.getId());
+        return true;
+    }
+
     // Retorna as turmas de um curso sem permitir alterações externas
-    public List<Turma> getTurmasPorCurso(Curso curso) {
-        List<Turma> listaTurmas = turmas.getOrDefault(curso, new ArrayList<>());
-        return Collections.unmodifiableList(listaTurmas);
+    public List<Long> getTurmasPorCurso(Curso curso) {
+        List<Long> listaTurmas = turmas.getOrDefault(curso, new ArrayList<>());
+        return listaTurmas;
     }
 
     // Busca cursos pelo nome exato ignorando letras maiusculas e minusculas
@@ -85,18 +98,10 @@ public class GerenciadorCursos {
         return resultado;
     }
 
-    // Realiza busca parcial no nome do curso
-    public List<Curso> buscarPorNomeParcial(String trechoNome) {
-        List<Curso> resultado = new ArrayList<>();
-        String trechoLower = trechoNome.toLowerCase();
-
+    // Metodo de Listar Cursos
+    public void listarCursos(){
         for (Curso curso : cursos.values()) {
-            if (curso.getNome().toLowerCase().contains(trechoLower)) {
-                resultado.add(curso);
-            }
+            System.out.println(curso.toString());
         }
-
-        return resultado;
     }
-
 }

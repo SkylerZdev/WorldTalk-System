@@ -5,6 +5,7 @@ import java.util.Comparator;
 
 public class Curso {
     private String nome;
+    private String disciplina;
     private double mensalidade;
     private List<Nivel> niveis;
     private final long id; 
@@ -24,20 +25,33 @@ public class Curso {
         this.niveis = new ArrayList<Nivel>();
     }
 
-    public Curso(String nome, double mensalidade, long id) {
+    public Curso(String nome, String disciplina, double mensalidade) {
         this.nome = nome;
+        this.disciplina = disciplina;
         this.mensalidade = mensalidade;
-        this.id = id;
+        this.id = idCounter++;
         this.niveis = new ArrayList<Nivel>();
+    }
+
+    public Curso(String nome, String disciplina, double mensalidade, List<Nivel> niveis) {
+        this.nome = nome;
+        this.disciplina = disciplina;
+        this.mensalidade = mensalidade;
+        this.id = idCounter++;
+        this.niveis = niveis;
     }
 
     // Getters
     public String getInfoBase() {
-        return nome;
+        return disciplina;
     }
 
     public String getNome() {
         return nome;
+    }
+    
+    public String getDisciplina(){
+        return disciplina;
     }
 
     public double getMensalidade() {
@@ -52,9 +66,22 @@ public class Curso {
         return niveis;
     }
 
+    public Nivel getNivelporID(long id){
+        for (Nivel n : niveis) {
+            if (n.getId() == id) {
+            return n;
+            }
+        }
+        return null;
+    }
+
     // Setters
-    public void setNome(String nome) {
+    public void setNome(String nome){
         this.nome = nome;
+    }
+
+    public void setDisciplina(String disciplina) {
+        this.disciplina = disciplina;
     }
 
     public void setMensalidade(double mensalidade) {
@@ -77,9 +104,15 @@ public class Curso {
     }
 
     public void listarNiveis() {
-        System.out.println("Níveis do curso " + nome + ":");
+        System.out.println("Níveis do curso " + disciplina + ":");
         for (Nivel nivel : niveis) {
-            System.out.println(nivel.getNomeNivel() + " - " + nivel.getDificuldade());
+            System.out.println("Id -  " + nivel.getId() + " | Nome - " + nivel.getNomeNivel() + " | Grau - " + nivel.getDificuldade());
         }
     }
+
+    @Override
+    public String toString(){
+        return "Id - " + id + " / Nome - " + nome + " / Disciplina - " + disciplina + " / Mensalidade - " + mensalidade;
+    }
+
 }

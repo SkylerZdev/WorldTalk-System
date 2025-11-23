@@ -16,6 +16,7 @@ public class Aluno {
 
     public Aluno(String nome, String usuario, String senha) {
         this.nome = nome;
+        this.usuario = usuario;
         this.senha = senha;
         this.id = idCounter++;
         this.isVip = false;

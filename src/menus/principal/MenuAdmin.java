@@ -8,6 +8,7 @@ import src.exceptions.LoginException;
 import src.gerenciadores.GerenciadorLogins;
 import src.menus.admin.MenuAdm_Alunos;
 import src.menus.admin.MenuBiblioteca;
+import src.menus.admin.MenuCursos;
 import src.modelos.Admin;
 
 public class MenuAdmin {
@@ -131,7 +132,8 @@ public class MenuAdmin {
 
             switch (opcao) {
                 case 1:
-                    //Menu de Cursos
+                    MenuCursos menuCursos = new MenuCursos(scanner, sistema);
+                    menuCursos.abrirMenu();
                     break;
 
                 case 2:
