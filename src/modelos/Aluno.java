@@ -3,6 +3,7 @@ package src.modelos;
 public class Aluno {
 
     private String nome;
+    private String usuario;
     private final long id;
     private String senha;
     private boolean isVip;
@@ -13,7 +14,7 @@ public class Aluno {
         this.id = idCounter++;
     }
 
-    public Aluno(String nome, String senha) {
+    public Aluno(String nome, String usuario, String senha) {
         this.nome = nome;
         this.senha = senha;
         this.id = idCounter++;
@@ -24,6 +25,14 @@ public class Aluno {
 
     public String getNome() {
         return nome;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String user){
+        this.usuario = user;
     }
 
     public void setNome(String nome) {

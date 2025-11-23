@@ -57,7 +57,6 @@ public class MenuPrincipal {
         GerenciadorLogins gerenciadorLogins = sistema.getGerenciadorLogins();
 
         do {
-            limpartela();
             System.out.println("\n=== MENU ADMIN ===");
             System.out.println("1 - Login");
             System.out.println("2 - Cadastrar-se");
@@ -140,8 +139,4 @@ public class MenuPrincipal {
         menuAluno.abrirMenu(scanner, sistema);
     }
 
-    public static void limpartela() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
 }

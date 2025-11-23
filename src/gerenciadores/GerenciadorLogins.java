@@ -55,12 +55,11 @@ public class GerenciadorLogins {
     }
     
     //Cadastro e Login para Alunos
-    public void CadastroAluno (String usuario, String senha) throws CadastroException {
-        if (alunos.containsKey(usuario)) {
+    public void CadastroAluno (Aluno aluno) throws CadastroException {
+        if (alunos.containsKey(aluno.getUsuario())) {
             throw new CadastroException("Usuário já existe.");
         }
-        Aluno novoAluno = new Aluno(usuario, senha);
-        alunos.put(usuario, novoAluno);
+        alunos.put(aluno.getUsuario(), aluno);
         return;
     }
 
