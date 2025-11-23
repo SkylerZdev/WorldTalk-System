@@ -153,7 +153,7 @@ public class MenuAluno {
                             System.out.println("P" + x++ + " | " + nota);
                         }
                     }
-
+                    break;
                 case 0:
                     System.out.println("Saindo da conta do aluno...");
                     pausar(scanner);

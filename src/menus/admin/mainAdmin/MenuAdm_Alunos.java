@@ -5,6 +5,7 @@ import java.util.Scanner;
 import src.gerenciadores.GerenciadorAlunos;
 import src.gerenciadores.GerenciadorLogins;
 import src.modelos.Aluno;
+import src.modelos.Turma;
 import src.app.ContextoSistema;
 
 public class MenuAdm_Alunos {
@@ -30,7 +31,7 @@ public class MenuAdm_Alunos {
             System.out.println("2 - Listar Alunos");
             System.out.println("3 - Remover Aluno");
             System.out.println("4 - Editar Aluno");
-            // Adicionar Notas.
+            System.out.println("5 - Adicionar Notas");
             System.out.println("0 - Voltar");
             System.out.print("Escolha uma opção: ");
 
@@ -64,6 +65,37 @@ public class MenuAdm_Alunos {
                     System.out.println("\n--- Lista de Alunos ---");
                     gAlunos.listarAlunos();
                     editarAluno();
+                    break;
+                case 5:
+                    if (gAlunos.getQuantidadeAlunos() == 0){
+                        System.out.println("Nenhum Aluno Cadastrado");
+                        break;
+                    }
+                    System.out.println("\n--- Lista de Alunos ---");
+                    gAlunos.listarAlunos();
+                    System.out.print("Digite o ID do Aluno para Receber as Notas: ");
+                    long id = scanner.nextLong();
+                    scanner.nextLine();
+
+                    Aluno alunoID = gAlunos.getAlunoPorId(id);
+                    if (alunoID == null) {
+                        System.out.println("Aluno não encontrado.");
+                    break;
+                    }
+                    if (gAlunos.getTurmasDoAluno(id).isEmpty()){
+                        System.out.println("Aluno ainda não está em uma turma");
+                        break;
+                    }
+                    System.out.println("Aluno Selecionado: " + alunoID.toString());
+                    for (Turma turma : gAlunos.getTurmasDoAluno(id)) {
+                        System.out.println("Disciplina: " + turma.getCurso().getDisciplina());
+                        System.out.println("Digite a nova Nota do aluno ('-1' Para Pular / '-2' para Cancelar) ): ");
+                        double nota = scanner.nextDouble();
+                        if (nota == -1){ continue; }
+                        if (nota == -2) { break; }
+                        if (nota > 10) {nota = 10;}
+                        turma.adicionarNota(id, nota);
+                    }
                     break;
                 case 0:
                     System.out.println("Voltando...");
