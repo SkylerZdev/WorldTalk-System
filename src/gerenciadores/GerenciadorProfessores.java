@@ -1,9 +1,12 @@
 package src.gerenciadores;
 import java.util.Map;
 
+import src.modelos.Curso;
 import src.modelos.Professor;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class GerenciadorProfessores {
 
@@ -26,6 +29,16 @@ public class GerenciadorProfessores {
 
     public Map<Long, Professor> getTodosProfessores() {
         return professores;
+    }
+
+    public List<Professor> getProfessoresHabilitados(Curso curso){
+        List<Professor> habilitados = new ArrayList<>();
+        for (Professor prof : professores.values()) {
+            if (prof.getCursosHabilitados().contains(curso)){
+                habilitados.add(prof);
+            }
+        }
+        return habilitados;
     }
 
     public void removerProfessorPorId(long id) {

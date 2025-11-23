@@ -1,4 +1,4 @@
-package src.menus.admin;
+package src.menus.admin.mainAdmin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,7 +81,7 @@ public class MenuCursos {
             }
         } while (opcao != 0);
     }
-    
+
     public void adicionarCurso(){
         System.out.println("Digite o Nome do Curso: ");
         String nome = scanner.nextLine();

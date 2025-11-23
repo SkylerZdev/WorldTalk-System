@@ -1,12 +1,14 @@
 package src.modelos;
 import src.agenda.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Turma {
 
     private final long id;
     private List<Aluno> alunos;
-    private Agenda agenda = new Agenda();
+    private Agenda agenda;
     private int limiteAlunos;
     private Curso curso;
     private Nivel nivel;
@@ -14,20 +16,31 @@ public class Turma {
     private static long idCounter = 1;
 
     //Construtores
-    public Turma(Curso curso, Nivel nivel, Professor professor, int limiteAlunos) {
+    public Turma(Curso curso, Nivel nivel, Professor professor, int limiteAlunos, Agenda agenda) {
         this.id = idCounter++;
         this.curso = curso;
         this.nivel = nivel;
         this.professor = professor;
+        this.limiteAlunos = limiteAlunos;
+        this.agenda = agenda;
+        this.alunos = new ArrayList<>();
     }
 
     //getters
+    public Agenda getAgenda(){
+        return agenda;
+    }
+
     public long getId() {
         return id;
     }
 
     public List<Aluno> getAlunos() {
         return alunos;
+    }
+
+    public int getQuantidadeAlunos(){
+        return alunos.size();
     }
 
     public int getLimiteAlunos(){
@@ -47,6 +60,10 @@ public class Turma {
 
     public List<Horario> getHorariosDisponiveis(DiaSemana dia) {
         return agenda.getHorariosDisponiveis(dia);
+    }
+
+    public int getVagasDisponiveis(){
+        return limiteAlunos-alunos.size();
     }
 
     
@@ -71,16 +88,30 @@ public class Turma {
         this.limiteAlunos = limite;
     }
 
-    public void addAluno(Aluno aluno) {
-        this.alunos.add(aluno);
+    public boolean addAluno(Aluno aluno) {
+        if(alunos.size()< limiteAlunos){
+            this.alunos.add(aluno);
+            return true;
+        }
+        return false;
     }
 
     public void removeAluno(Aluno aluno) {
         this.alunos.remove(aluno);
     }
+
+    public void listarAlunos(){
+        for (Aluno aluno : alunos) {
+            System.out.println(aluno.toString());
+        }
+    }
+
+    public void exibirAgenda(){
+        agenda.exibirAgenda();
+    }
     
     @Override
     public String toString() {
-        return "Id: " + id + " / Professor: " + professor + " / Curso: " + curso + " / Nivel: " + nivel + " / Num. Alunos: " + alunos.size();
+        return "Id: " + id + " / Professor: " + professor.getNome() + " / Curso: " + curso + " / Nivel: " + nivel + " / Num. Alunos: " + alunos.size() + " / Vagas Disponiveis: " + (limiteAlunos-alunos.size());
     }
 }

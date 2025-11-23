@@ -1,4 +1,4 @@
-package src.menus.admin;
+package src.menus.admin.mainAdmin;
 
 import java.util.HashSet;
 import java.util.Scanner;

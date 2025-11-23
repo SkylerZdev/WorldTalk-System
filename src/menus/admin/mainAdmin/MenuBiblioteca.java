@@ -1,4 +1,4 @@
-package src.menus.admin;
+package src.menus.admin.mainAdmin;
 import java.util.Scanner;
 import src.app.ContextoSistema;
 import src.menus.admin.biblioteca.*;
@@ -12,9 +12,6 @@ public class MenuBiblioteca {
         this.sistema = sistema;
         this.scanner = scanner;
     }
-
-    //MenuCursos / MenuProfessores / MenuBiblioteca / MenuAlunos
-    // Implementar posteriormente
 
     public void abrirMenu() {
 

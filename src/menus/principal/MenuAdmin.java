@@ -6,10 +6,7 @@ import src.app.ContextoSistema;
 import src.exceptions.CadastroException;
 import src.exceptions.LoginException;
 import src.gerenciadores.GerenciadorLogins;
-import src.menus.admin.MenuAdm_Alunos;
-import src.menus.admin.MenuBiblioteca;
-import src.menus.admin.MenuCursos;
-import src.menus.admin.MenuProfessores;
+import src.menus.admin.mainAdmin.*;
 import src.modelos.Admin;
 
 public class MenuAdmin {
@@ -153,8 +150,8 @@ public class MenuAdmin {
                     break;
                     
                 case 5:
-                    //MenuTurmas menuTurmas = new MenuTurmas(sistema, scanner);
-                    //menuTurmas.abrirMenu();
+                    MenuTurmas menuTurmas = new MenuTurmas(sistema, scanner);
+                    menuTurmas.abrirMenu();
                 case 0:
                     System.out.println("Deslogando...");
                     break;

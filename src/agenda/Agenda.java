@@ -24,6 +24,55 @@ public class Agenda {
         }
     }
 
+    public void exibirAgenda() {
+        System.out.println("\n===== AGENDA =====");
+
+        for (DiaSemana dia : DiaSemana.values()) {
+            System.out.println("\n" + dia.getString() + ":");
+
+            List<Horario> horariosDoDia = horariosPorDia.get(dia);
+
+            if (horariosDoDia == null || horariosDoDia.isEmpty()) {
+                System.out.println("  (Sem Horários Cadastrados)");
+                continue;
+            }
+
+            for (Horario h : horariosDoDia) {
+                String inicioStr = String.format("%02d:00", h.getHoraInicio());
+                String fimStr    = String.format("%02d:00", h.getHoraFim());
+
+                String status = h.isDisponivel() ? "[LIVRE]" : "[OCUPADO]";
+                System.out.println("  " + inicioStr + " - " + fimStr + " " + status);
+            }
+        }
+
+        System.out.println();
+    }
+
+        public void exibirAgendaDoDia(DiaSemana dia) {
+        System.out.println("\n=====" + dia.getString() + "=====");
+
+            List<Horario> horariosDoDia = horariosPorDia.get(dia);
+
+            if (horariosDoDia == null || horariosDoDia.isEmpty()) {
+                System.out.println("  (Sem Horários Cadastrados)");
+                return;
+            }
+            int counter = 1;
+            for (Horario h : horariosDoDia) {
+                String inicioStr = String.format("%02d:00", h.getHoraInicio());
+                String fimStr    = String.format("%02d:00", h.getHoraFim());
+
+                String status = h.isDisponivel() ? "[LIVRE]" : "[OCUPADO]";
+                System.out.println("ID - " + counter++ + "  |" + inicioStr + " - " + fimStr + " " + status);
+            }
+        
+
+        System.out.println();
+    }
+
+
+
     // Getters e Setters
     public EnumMap<DiaSemana, List<Horario>> getTodosHorarios() {
         return horariosPorDia;
@@ -53,7 +102,7 @@ public class Agenda {
         List<Horario> todosHorarios = horariosPorDia.get(dia);
 
         for (Horario horario : todosHorarios) {
-            if (horario.isDisponivel()) {
+            if (!horario.isDisponivel()) {
                 ocupados.add(horario);
             }
         }

@@ -12,17 +12,19 @@ public class Professor {
     private String nome;
     private final long id;
     private Agenda agenda = new Agenda();
-    private Set<Curso> cursosHabilitados = new HashSet<Curso>();
+    private Set<Curso> cursosHabilitados;
     private static long idCounter = 1;
 
     //Construtores
     public Professor(){
         this.id = idCounter++;
+        this.cursosHabilitados = new HashSet<Curso>();
     }
     
     public Professor(String nome) {
         this.nome = nome;
         this.id = idCounter++;
+        this.cursosHabilitados = new HashSet<Curso>();
     }
     
     public Professor(String nome, Set<Curso> habilitados){
@@ -42,6 +44,10 @@ public class Professor {
 
     public long getId() {
         return id;
+    }
+
+    public Agenda getAgenda(){
+        return agenda;
     }
 
     public List<Horario> getHorariosDisponiveis(DiaSemana dia) {
