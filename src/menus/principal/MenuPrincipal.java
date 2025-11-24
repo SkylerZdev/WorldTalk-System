@@ -10,17 +10,6 @@ public class MenuPrincipal {
 
     public void abrirMenu(Scanner scanner, ContextoSistema sistema) {
         int opcao;
-
-        // Cadastro Universal para Testes
-        GerenciadorLogins g = sistema.getGerenciadorLogins();
-
-        g.DefinirSenhaUniversal("1");
-        try {
-            g.CadastroAdm("1", "2", "1");
-        } catch (CadastroException e) {
-            System.out.println(e.getMessage());
-        }
-
         do {
             System.out.println("\n=== MENU PRINCIPAL ===");
             System.out.println("1 - Perfil Aluno");
