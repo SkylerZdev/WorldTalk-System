@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         ContextoSistema sistema = new ContextoSistema();
-        sistema.carregarDadosDeTeste(sistema);
+        // sistema.carregarDadosDeTeste(sistema);
         MenuPrincipal menuPrincipal = new MenuPrincipal();
         
         menuPrincipal.abrirMenu(scanner, sistema);
