@@ -55,9 +55,4 @@ Devido a restrições de prazo acadêmico e à decisão estratégica de prioriza
 O "WorldTalk System" cumpre os requisitos centrais de um sistema de gestão escolar robusto. A escolha pelo uso de estruturas de dados avançadas (Maps e Listas Dinâmicas) ao invés de vetores simples demonstra maturidade técnica, resultando em um software rápido, seguro e de fácil manutenção, preparado para futuras expansões conforme detalhado no escopo futuro.
 
 ---
-**Equipe de Desenvolvimento:**
-[Seu Nome Aqui]
-[Nome do Amigo 1]
-[Nome do Amigo 2]
-**Disciplina:** Programação Orientada a Objetos (Java)
-**Data:** Novembro/2024
+
